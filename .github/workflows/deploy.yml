@@ -6,20 +6,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Git Checkout
-        uses: actions/checkout@v2
-
-      - name: Yarn Cache
-        uses: c-hive/gha-yarn-cache@v1
-
-      - name: Install dependencies
-        run: yarn
-        
-      - name: Install node-sass
-        run: npm install --save-dev  --unsafe-perm node-sass@4.12.0
-
-      - name: Build React App
-        run: yarn build
+      - name: Create env
         env:
           HTTPS: 'true'
           REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
