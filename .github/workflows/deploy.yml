@@ -16,7 +16,7 @@ jobs:
         run: yarn
         
       - name: Install node-sass
-        run: npm install --save-dev  --unsafe-perm node-sass
+        run: npm install --save-dev  --unsafe-perm node-sass@4.12.0
 
       - name: Build React App
         run: yarn build
