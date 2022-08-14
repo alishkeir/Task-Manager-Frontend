@@ -1,6 +1,6 @@
 import './App.scss';
 
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import TasksList from './pages/tasks-list/TasksList';
 import CreateTaskPage from './pages/create-task/CreateTaskPage';
 import { ProtectedRoute } from './utils/Protected';
@@ -10,23 +10,21 @@ import Register from './pages/register/Register';
 
 function App() {
     return (
-        <HashRouter>
-            <Routes>
-                <Route exact path='/login' element={<AuthRoute />}>
-                    <Route path='/login' element={<Login />} />
-                </Route>
+        <Routes>
+            <Route exact path='/login' element={<AuthRoute />}>
+                <Route path='/login' element={<Login />} />
+            </Route>
 
-                <Route exact path='/register' element={<AuthRoute />}>
-                    <Route path='/register' element={<Register />} />
-                </Route>
-                <Route exact path='/' element={<ProtectedRoute />}>
-                    <Route exact path='/' element={<TasksList />} />
-                </Route>
-                <Route exact path='/create' element={<ProtectedRoute />}>
-                    <Route exact path='/create' element={<CreateTaskPage />} />
-                </Route>
-            </Routes>
-        </HashRouter>
+            <Route exact path='/register' element={<AuthRoute />}>
+                <Route path='/register' element={<Register />} />
+            </Route>
+            <Route exact path='/' element={<ProtectedRoute />}>
+                <Route exact path='/' element={<TasksList />} />
+            </Route>
+            <Route exact path='/create' element={<ProtectedRoute />}>
+                <Route exact path='/create' element={<CreateTaskPage />} />
+            </Route>
+        </Routes>
     );
 }
 
