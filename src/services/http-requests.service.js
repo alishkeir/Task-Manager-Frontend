@@ -55,7 +55,7 @@ class HTTPRequests {
 
     logout() {
         localStorage.removeItem('access_token');
-        window.location.replace('/login');
+        window.location.reload();
     }
 
     // ==================================================================================== //
