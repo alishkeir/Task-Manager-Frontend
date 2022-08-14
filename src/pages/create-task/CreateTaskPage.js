@@ -1,93 +1,99 @@
-import React, { Component } from 'react';
-import { TextField, FormControl, Button } from '@material-ui/core';
-import styled from 'styled-components';
-import { inject } from 'mobx-react';
-import ErrorMessage from '../../components/ErrorMessage';
+import { Button, TextField } from '@mui/material';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import HTTPRequests from '../../services/http-requests.service';
+import WithRouter from '../../utils/WithRouter';
+import './CreateTaskPage.scss';
 
-const FormWrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+const CreateTaskPage = () => {
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [errors, setErrors] = useState([]);
 
-const FormContainer = styled.div`
-  max-width: 480px;
-  width: 100%;
-  background-color: #edf4ff;
-  padding: 30px;
-  border-radius: 5px;
-`;
+    // ==================================================================================== //
 
-@inject('tasksStore', 'routerStore')
-class CreateTaskPage extends Component {
-  constructor(props) {
-    super(props);
+    const navigate = useNavigate();
 
-    this.state = {
-      title: '',
-      description: '',
-      errorMessage: null,
+    // ==================================================================================== //
+
+    const createTask = (e) => {
+        e.preventDefault();
+
+        HTTPRequests.createTask(title, description).then((res) => {
+            if (res.status === 201) {
+                return navigate('/');
+            }
+
+            if (res.status === 400) {
+                setErrors(res.data.message);
+            }
+
+            if (res.status === 401) {
+                return navigate('/login');
+            }
+        });
+
+        return;
     };
-  }
 
-  handleSubmitTask = async () => {
-    const { tasksStore } = this.props;
-    const { title, description } = this.state;
+    // ==================================================================================== //
 
-    try {
-      await tasksStore.createTask(title, description);
-      window.location.hash = '/tasks';
-    } catch (error) {
-      const errorMessage = error.response.data.message;
-      this.setState({ errorMessage });
-    }
-  };
+    const showErrors = errors.map((error) => {
+        return (
+            <li key={error}>
+                {error.charAt(0).toUpperCase() + error.slice(1)}
+            </li>
+        );
+    });
 
-  render() {
+    // ==================================================================================== //
+
     return (
-      <FormWrapper>
-        <FormContainer>
-          <h1>Create a new task</h1>
-          <p>Provide information about the task you wish to complete.</p>
+        <div className='task-form-container'>
+            <div className='form-inner'>
+                <div className='form-header'>
+                    <Link to='/' className='back-button'>
+                        <Button variant='contained' color='warning'>
+                            Back
+                        </Button>
+                    </Link>
+                    <h1>Create a Task</h1>
+                </div>
+                <p>Provide information about the task you wish to complete.</p>
 
-          { this.state.errorMessage && <ErrorMessage message={this.state.errorMessage} />}
+                <div
+                    className='task-errors-container'
+                    style={{ display: errors.length === 0 ? 'none' : 'block' }}
+                >
+                    <h2>Oops!</h2>
+                    <ul>{showErrors}</ul>
+                </div>
 
-          <FormControl fullWidth>
-            <TextField
-              label="Title"
-              placeholder="Title"
-              margin="normal"
-              variant="outlined"
-              onChange={e => this.setState({ title: e.target.value })}
-            />
-          </FormControl>
-          <FormControl fullWidth>
-            <TextField
-              label="Description"
-              placeholder="Description"
-              multiline
-              rows="8"
-              margin="normal"
-              variant="outlined"
-              onChange={e => this.setState({ description: e.target.value })}
-            />
-          </FormControl>
+                <form onSubmit={(e) => createTask(e)}>
+                    <TextField
+                        label='Title*'
+                        variant='outlined'
+                        size='small'
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
 
-          <Button
-            style={{ marginTop: '10px' }}
-            fullWidth
-            variant="contained"
-            color="primary"
-            onClick={this.handleSubmitTask}
-          >
-            CREATE TASK
-          </Button>
-        </FormContainer>
-      </FormWrapper>
+                    <TextField
+                        label='Description*'
+                        multiline
+                        rows={8}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                    <Button
+                        variant='contained'
+                        className='add-task-button'
+                        type='submit'
+                    >
+                        Create Task
+                    </Button>
+                </form>
+            </div>
+        </div>
     );
-  }
-}
+};
 
-export default CreateTaskPage;
+export default WithRouter(CreateTaskPage);

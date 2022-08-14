@@ -1,0 +1,72 @@
+.register-form-container {
+    width: 100%;
+    height: 96vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .form-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 30rem;
+        max-width: 30rem;
+        background: #edf4ff;
+        padding: 1.875rem;
+        border-radius: 0.3125rem;
+
+        .form-header {
+            width: 100%;
+            margin-bottom: 1.2rem;
+
+            h1 {
+                margin-bottom: 1rem;
+            }
+        }
+
+        .task-errors-container {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            background-color: #f7c5c0;
+            color: #a51809;
+            box-sizing: border-box;
+            margin-bottom: 1rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            .MuiFormControl-root {
+                margin-bottom: 1rem;
+                .MuiInputBase-root {
+                    .MuiOutlinedInput-notchedOutline {
+                        border-width: 0.0938rem;
+                    }
+                }
+            }
+
+            .hint {
+                margin: 1rem 0;
+            }
+
+            hr {
+                width: 100%;
+                margin: 0 0 0.5rem;
+            }
+
+            .login-link {
+                text-decoration: none;
+                width: 100%;
+                margin-top: 0.4rem;
+
+                .MuiButtonBase-root {
+                    width: 100%;
+                    color: rgba(0, 0, 0, 0.87);
+                }
+            }
+        }
+    }
+}

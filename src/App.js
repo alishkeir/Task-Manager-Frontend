@@ -1,26 +1,33 @@
-import React, { Component, Fragment } from 'react';
-import { Route } from 'react-router-dom';
-import { inject, observer } from 'mobx-react';
+import './App.scss';
 
-import SignInPage from './pages/signin/SignInPage';
-import SignUpPage from './pages/signup/SignUpPage';
-import TasksPage from './pages/tasks/TasksPage';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import TasksList from './pages/tasks-list/TasksList';
 import CreateTaskPage from './pages/create-task/CreateTaskPage';
+import { ProtectedRoute } from './utils/Protected';
+import { AuthRoute } from './utils/AuthRoute';
+import Login from './pages/login/Login';
+import Register from './pages/register/Register';
 
-@inject('routerStore')
-@observer
-class App extends Component {
-    render() {
-        return (
-            <Fragment>
-                <Route exact path='/' component={SignInPage} />
-                <Route path='/signin/' component={SignInPage} />
-                <Route path='/signup/' component={SignUpPage} />
-                <Route exact path='/tasks' component={TasksPage} />
-                <Route exact path='/tasks/create' component={CreateTaskPage} />
-            </Fragment>
-        );
-    }
+function App() {
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route exact path='/login' element={<AuthRoute />}>
+                    <Route path='/login' element={<Login />} />
+                </Route>
+
+                <Route exact path='/register' element={<AuthRoute />}>
+                    <Route path='/register' element={<Register />} />
+                </Route>
+                <Route exact path='/' element={<ProtectedRoute />}>
+                    <Route exact path='/' element={<TasksList />} />
+                </Route>
+                <Route exact path='/create' element={<ProtectedRoute />}>
+                    <Route exact path='/create' element={<CreateTaskPage />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;
