@@ -11,7 +11,7 @@ import Register from './pages/register/Register';
 function App() {
     return (
         <HashRouter>
-            <Routes basename={process.env.PUBLIC_URL || ''}>
+            <Routes>
                 <Route exact path='/login' element={<AuthRoute />}>
                     <Route path='/login' element={<Login />} />
                 </Route>
