@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "https://alishkeir.github.io/Task-Manager-Frontend/static/css/main.bf5865f2.css",
+    "main.js": "https://alishkeir.github.io/Task-Manager-Frontend/static/js/main.9349fd65.js",
+    "static/js/787.25a4f316.chunk.js": "https://alishkeir.github.io/Task-Manager-Frontend/static/js/787.25a4f316.chunk.js",
+    "index.html": "https://alishkeir.github.io/Task-Manager-Frontend/index.html",
+    "main.bf5865f2.css.map": "https://alishkeir.github.io/Task-Manager-Frontend/static/css/main.bf5865f2.css.map",
+    "main.9349fd65.js.map": "https://alishkeir.github.io/Task-Manager-Frontend/static/js/main.9349fd65.js.map",
+    "787.25a4f316.chunk.js.map": "https://alishkeir.github.io/Task-Manager-Frontend/static/js/787.25a4f316.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bf5865f2.css",
+    "static/js/main.9349fd65.js"
+  ]
+}
