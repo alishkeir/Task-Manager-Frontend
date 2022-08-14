@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class HTTPRequests {
-    BASE_URL = 'https://task-manager-alishkeir.netlify.app';
+    BASE_URL = 'https://task-manager-alishkeir.herokuapp.com';
 
     // ==================================================================================== //
 
