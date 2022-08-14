@@ -25,6 +25,10 @@ function App() {
                 <Route exact path='/create' element={<ProtectedRoute />}>
                     <Route exact path='/create' element={<CreateTaskPage />} />
                 </Route>
+
+                <Route exact path='*' element={<ProtectedRoute />}>
+                    <Route exact path='*' element={<TasksList />} />
+                </Route>
             </Routes>
         </BrowserRouter>
     );

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class HTTPRequests {
-    BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
+    BASE_URL = 'https://task-manager-alishkeir.netlify.app';
 
     // ==================================================================================== //
 
